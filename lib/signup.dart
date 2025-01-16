@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mytravelbuddy/singin.dart';
 
 void main() {
   runApp(const MyApp());
@@ -107,6 +108,15 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Re-enter your password',
+                ),
+              ),
+            ),
 
 
 
@@ -125,13 +135,13 @@ class _SignUpState extends State<SignUp> {
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (context) => Questionaire()));
                 },
-                child: Text('Log in')),
+                child: Text('Sign up')),
 
             // USER FRIENDLY TEXT -----------------------------
             Padding(
               padding: EdgeInsets.only(top: 20, bottom: 10),
               child: Text(
-                "Don't have an account?",
+                "Already have an account?",
                 style: TextStyle(color: Colors.black, fontSize: 15),
               ),
             ),
@@ -150,10 +160,10 @@ class _SignUpState extends State<SignUp> {
                   minimumSize: MaterialStateProperty.all(Size(150, 50)),
                 ),
                 onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => SignUp()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignIn(title: 'My Travel Buddy',)));
                 },
-                child: Text('Sign up'))
+                child: Text('Sign in'))
           ],
         ),
       ),

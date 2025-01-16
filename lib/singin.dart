@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mytravelbuddy/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -127,8 +128,8 @@ class _SignInState extends State<SignIn> {
                   minimumSize: MaterialStateProperty.all(Size(150, 50)),
                 ),
                 onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => SignUp()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignUp(title: 'My Travel Buddy',)));
                 },
                 child: Text('Sign up'))
           ],
