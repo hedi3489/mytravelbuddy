@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,6 +31,34 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+
+  void _signUp() {
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+    final confirmPassword = confirmPasswordController.text;
+
+    if (name.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      _showMessage('All fields are required.');
+      return;
+    }
+
+    if (password != confirmPassword) {
+      _showMessage('Passwords do not match.');
+      return;
+    }
+
+    _showMessage('Sign up successful! Welcome, $name.');
+    // Add logic for signing up the user here, such as sending data to an API.
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,98 +68,108 @@ class _SignUpState extends State<SignUp> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'New to My Travel Buddy?',
-              style: TextStyle(fontSize: 24),
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'New to My Travel Buddy?',
+                style: TextStyle(fontSize: 24),
+              ),
 
-            // NAME TEXTFIELD
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your name',
+              // NAME TEXTFIELD
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                child: TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your name',
+                  ),
                 ),
               ),
-            ),
 
-            // EMAIL TEXTFIELD
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your email',
+              // EMAIL TEXTFIELD
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                child: TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your email',
+                  ),
                 ),
               ),
-            ),
 
-            // PASSWORD TEXTFIELDS
-            // TODO: make input invisible
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your password',
+              // PASSWORD TEXTFIELDS
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                child: TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your password',
+                  ),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Re-enter your password',
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                child: TextField(
+                  controller: confirmPasswordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Re-enter your password',
+                  ),
                 ),
               ),
-            ),
 
-            // SIGN IN BUTTON
-            ElevatedButton(
+              // SIGN UP BUTTON
+              ElevatedButton(
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                  minimumSize: MaterialStateProperty.all(const Size(150, 50)),
                 ),
-                onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => ValidateCredentials()));
-                },
-                child: Text('Sign up')),
-
-            // USER FRIENDLY TEXT
-            Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 10),
-              child: Text(
-                "Already have an account?",
-                style: TextStyle(color: Colors.black, fontSize: 15),
+                onPressed: _signUp,
+                child: const Text('Sign up'),
               ),
-            ),
 
-            // SIGN UP BUTTON
-            ElevatedButton(
+              // USER FRIENDLY TEXT
+              const Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 10),
+                child: Text(
+                  "Already have an account?",
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                ),
+              ),
+
+              // SIGN IN BUTTON
+              ElevatedButton(
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                  minimumSize: MaterialStateProperty.all(const Size(150, 50)),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignIn(title: 'My Travel Buddy',)));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignIn(title: 'My Travel Buddy'),
+                    ),
+                  );
                 },
-                child: Text('Sign in'))
-          ],
+                child: const Text('Sign in'),
+              ),
+            ],
+          ),
         ),
       ),
     );

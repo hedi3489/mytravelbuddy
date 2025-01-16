@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,6 +31,37 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  // Controllers for the TextFields
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // Function to handle login
+  void _handleLogin() {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter both email and password.')),
+      );
+      return;
+    }
+
+    // Simulate login logic for now
+    print('Email: $email');
+    print('Password: $password');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Login successful!')),
+    );
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers to free resources
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +80,11 @@ class _SignInState extends State<SignIn> {
             ),
 
             // EMAIL TEXTFIELD
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
               child: TextField(
-                decoration: InputDecoration(
+                controller: _emailController,
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter your email',
                 ),
@@ -61,10 +92,12 @@ class _SignInState extends State<SignIn> {
             ),
 
             // PASSWORD TEXTFIELD
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
               child: TextField(
-                decoration: InputDecoration(
+                controller: _passwordController,
+                obscureText: true, // Hides the password
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter your password',
                 ),
@@ -73,22 +106,20 @@ class _SignInState extends State<SignIn> {
 
             // SIGN IN BUTTON
             ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
-                  minimumSize: MaterialStateProperty.all(Size(150, 50)),
                 ),
-                onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => ));
-                },
-                child: Text('Log in')),
+                minimumSize: MaterialStateProperty.all(const Size(150, 50)),
+              ),
+              onPressed: _handleLogin,
+              child: const Text('Log in'),
+            ),
 
             // USER FRIENDLY TEXT
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 20, bottom: 10),
               child: Text(
                 "Don't have an account?",
@@ -98,19 +129,24 @@ class _SignInState extends State<SignIn> {
 
             // SIGN UP BUTTON
             ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
-                  minimumSize: MaterialStateProperty.all(Size(150, 50)),
                 ),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUp(title: 'My Travel Buddy',)));
-                },
-                child: Text('Sign up'))
+                minimumSize: MaterialStateProperty.all(const Size(150, 50)),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SignUp(title: 'My Travel Buddy'),
+                  ),
+                );
+              },
+              child: const Text('Sign up'),
+            )
           ],
         ),
       ),
