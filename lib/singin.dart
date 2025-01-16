@@ -14,21 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Travel Buddy',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -39,11 +24,6 @@ class MyApp extends StatelessWidget {
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key, required this.title});
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -68,6 +48,8 @@ class _SignInState extends State<SignIn> {
               'Welcome to My Travel Buddy',
               style: TextStyle(fontSize: 24),
             ),
+
+            // EMAIL TEXTFIELD
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
               child: TextField(
@@ -77,6 +59,8 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
             ),
+
+            // PASSWORD TEXTFIELD
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
               child: TextField(
@@ -87,9 +71,7 @@ class _SignInState extends State<SignIn> {
               ),
             ),
 
-
-
-            // SIGN IN BUTTON -----------------------------------
+            // SIGN IN BUTTON
             ElevatedButton(
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
@@ -101,11 +83,11 @@ class _SignInState extends State<SignIn> {
                 ),
                 onPressed: () {
                   // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => Questionaire()));
+                  //     MaterialPageRoute(builder: (context) => ));
                 },
                 child: Text('Log in')),
 
-            // USER FRIENDLY TEXT -----------------------------
+            // USER FRIENDLY TEXT
             Padding(
               padding: EdgeInsets.only(top: 20, bottom: 10),
               child: Text(
@@ -114,12 +96,9 @@ class _SignInState extends State<SignIn> {
               ),
             ),
 
-
-            // SIGN UP BUTTON -----------------------------
+            // SIGN UP BUTTON
             ElevatedButton(
                 style: ButtonStyle(
-                  // backgroundColor: MaterialStateProperty.all(Colors.black87),
-                  // foregroundColor: Colors.white,
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),

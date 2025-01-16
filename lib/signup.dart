@@ -12,26 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // title: 'My Travel Buddy',
-      // theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
-      // ),
+      title: 'My Travel Buddy',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
       home: const SignUp(title: 'My Travel Buddy'),
     );
   }
@@ -39,11 +24,6 @@ class MyApp extends StatelessWidget {
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key, required this.title});
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -69,9 +49,7 @@ class _SignUpState extends State<SignUp> {
               style: TextStyle(fontSize: 24),
             ),
 
-
-
-            // NAME ---------------------------------------------------
+            // NAME TEXTFIELD
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
               child: TextField(
@@ -82,9 +60,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
 
-
-
-            // EMAIL ---------------------------------------------------
+            // EMAIL TEXTFIELD
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
               child: TextField(
@@ -95,9 +71,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
 
-
-
-            // PASSWORD ---------------------------------------------------
+            // PASSWORD TEXTFIELDS
             // TODO: make input invisible
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
@@ -118,10 +92,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
 
-
-
-            // TODO: CHANGE THE BUTTONS
-            // SIGN IN BUTTON -----------------------------------
+            // SIGN IN BUTTON
             ElevatedButton(
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
@@ -133,11 +104,11 @@ class _SignUpState extends State<SignUp> {
                 ),
                 onPressed: () {
                   // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => Questionaire()));
+                  //     MaterialPageRoute(builder: (context) => ValidateCredentials()));
                 },
                 child: Text('Sign up')),
 
-            // USER FRIENDLY TEXT -----------------------------
+            // USER FRIENDLY TEXT
             Padding(
               padding: EdgeInsets.only(top: 20, bottom: 10),
               child: Text(
@@ -146,12 +117,9 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
 
-
-            // SIGN UP BUTTON -----------------------------
+            // SIGN UP BUTTON
             ElevatedButton(
                 style: ButtonStyle(
-                  // backgroundColor: MaterialStateProperty.all(Colors.black87),
-                  // foregroundColor: Colors.white,
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
